@@ -136,7 +136,7 @@
         <item>0</item>
     </integer-array>
 
-    <integer name="config_buttonBrightnessSettingDefault">0</integer>
+    <!-- <integer name="config_buttonBrightnessSettingDefault">0</integer> -->
 
     <integer-array name="config_longPressVibePattern">
         <item>0</item>
@@ -236,7 +236,7 @@
     <integer name="config_deviceHardwareKeys">0</integer>
 
     <!-- Device supports LED flashlight -->
-    <bool name="config_enableTorch">true</bool>
+    <!-- <bool name="config_enableTorch">true</bool> -->
 
     <!-- Disable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
