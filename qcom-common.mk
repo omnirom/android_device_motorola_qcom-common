@@ -36,7 +36,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
-    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
+    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
+
 
 
 ## overlays
@@ -62,6 +64,9 @@ PRODUCT_PACKAGES += \
 
 # Misc
 PRODUCT_PACKAGES += \
+    curl \
+    libbson \
+    libcurl \
     tcpdump \
     Torch
 
@@ -130,6 +135,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/scripts/mount_pds.sh:system/bin/mount_pds.sh
 
+# GPS configuration
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/config/gps.conf:system/etc/gps.conf
+
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -141,8 +150,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=dyn \
     persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.logs=0 \
-    debug.enabletr=0 \
-    mm.enable.smoothstreaming=true
+    debug.enabletr=0
 
 # QCOM Display
 PRODUCT_PACKAGES += \
@@ -213,9 +221,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    lpa.decode=false \
-    tunnel.decode=true \
-    tunnel.audiovideo.decode=true \
+    lpa.decode=true \
     qcom.hw.aac.encoder=true \
     af.resampler.quality=255 \
     persist.audio.lowlatency.rec=false

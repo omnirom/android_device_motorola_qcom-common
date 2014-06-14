@@ -36,6 +36,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
 # Wifi related defines
 BOARD_HAS_QCOM_WLAN := true
@@ -90,11 +91,15 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
+# GPS
+BOARD_HAVE_NEW_QC_GPS := true
+
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_FLUENCE_INCALL := true
 BOARD_USES_SEPERATED_AUDIO_INPUT := true
 BOARD_USES_SEPERATED_VOICE_SPEAKER := true
+TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_USES_QCOM_COMPRESSED_AUDIO := true
 AUDIO_FEATURE_DISABLED_FM := true
 
@@ -160,6 +165,7 @@ BOARD_SEPOLICY_UNION += \
 	radio.te \
 	rild.te \
 	rmt.te \
+	sdcard_internal.te \
 	sdcardd.te \
 	sensors.te \
 	shell.te \
