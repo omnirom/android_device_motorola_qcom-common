@@ -36,6 +36,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
 # Wifi related defines
 BOARD_HAS_QCOM_WLAN := true
@@ -95,6 +96,7 @@ BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_FLUENCE_INCALL := true
 BOARD_USES_SEPERATED_AUDIO_INPUT := true
 BOARD_USES_SEPERATED_VOICE_SPEAKER := true
+TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_USES_QCOM_COMPRESSED_AUDIO := true
 AUDIO_FEATURE_DISABLED_FM := true
 
@@ -103,8 +105,8 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 #camera abi compatiblily
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 
-# Power
-TARGET_USES_CM_POWERHAL := true
+# Use CM PowerHAL by default if not definied elsewhere
+TARGET_POWERHAL_VARIANT ?= cm
 
 # Number of supplementary service groups allowed by init
 TARGET_NR_SVC_SUPP_GIDS := 28
@@ -160,6 +162,7 @@ BOARD_SEPOLICY_UNION += \
 	radio.te \
 	rild.te \
 	rmt.te \
+	sdcard_internal.te \
 	sdcardd.te \
 	sensors.te \
 	shell.te \
@@ -172,3 +175,9 @@ BOARD_SEPOLICY_UNION += \
 	vold.te \
 	wpa_supplicant.te \
 	zygote.te
+
+ifneq ($(TARGET_BUILD_VARIANT),user)
+	BOARD_SEPOLICY_UNION += su.te
+endif
+
+PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
