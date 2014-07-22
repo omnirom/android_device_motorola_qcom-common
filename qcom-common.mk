@@ -63,7 +63,7 @@ PRODUCT_PACKAGES += \
 # Misc
 PRODUCT_PACKAGES += \
     tcpdump \
-    Torch
+    OmniTorch
 
 # Charger
 PRODUCT_PACKAGES += charger charger_res_images
